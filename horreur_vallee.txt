@@ -658,23 +658,23 @@ Les cavaliers sont tous deux armés d'une lance et ont les
 caractéristiques suivantes :
 
 CAVALIER I CAVALIER II
-RESISTANCE
+    RESISTANCE
 
-10
+    10
 
-7
+    7
 
-DEXTERITE
+    DEXTERITE
 
-5
+    5
 
-8
+    8
 
-LANCE
+    LANCE
 
-1/2
+    1/2
 
-1/2
+    1/2
 
 C'est vous qui avez l'initiative de l'attaque. Par la suite, vos
 adversaires vous agresseront aussi longtemps qu'ils en auront la

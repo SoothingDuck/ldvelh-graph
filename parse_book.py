@@ -23,9 +23,6 @@ def next_article(f):
             return (article_number, article)
         article += line
 
-filename = sys.argv[1]
-
-
 def possible_routes(article):
     """Extract possible routes for article"""
     tmp = []
@@ -40,18 +37,45 @@ def possible_routes(article):
             flag_vous = True
         
         if flag_vous:
-            m = re.findall("[0-9]+", line)
+            m = [int(x) for x in re.findall("[0-9]+", line)]
             tmp = tmp + m 
 
     return(tmp)
 
 
-with open(filename, "r") as f:
-    
-    article_number = 1
-    go_to_first_page(f)
+filename = sys.argv[1]
+nodes_filename = "horreur_vallee_nodes.csv"
+edges_filename = "horreur_vallee_edges.csv"
 
-    next_article_number, article = next_article(f) 
-    next_article_number, article = next_article(f) 
+with open(nodes_filename, "w") as nodes_outfile:
+    nodes_outfile.write("Node_ID\n")
 
-    print(possible_routes(article))
+    with open(edges_filename, "w") as edges_outfile:
+        edges_outfile.write("Source_ID;Destination_ID\n")
+
+        with open(filename, "r") as infile:
+            
+            i = 1
+            go_to_first_page(infile)
+
+            nodes_outfile.write("%d\n" % i)
+
+            while True:
+                data = next_article(infile)
+                if data is None:
+                    break
+
+                i += 1
+
+                article_number, article = data
+
+                for destination_id in possible_routes(article):
+                    edges_outfile.write("%d;%d\n" % (i, destination_id))
+
+                nodes_outfile.write("%d\n" % i)
+
+                
+                
+
+
+
