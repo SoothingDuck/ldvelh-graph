@@ -2,6 +2,7 @@
 import os
 import sys
 import re
+import csv
 
 
 def go_to_first_page(f):
@@ -50,11 +51,15 @@ filename = sys.argv[1]
 nodes_filename = "horreur_vallee_nodes.csv"
 edges_filename = "horreur_vallee_edges.csv"
 
-with open(nodes_filename, "w") as nodes_outfile:
-    nodes_outfile.write("Node_ID\n")
+with open(nodes_filename, "w", newline = "\n", encoding = "utf-8") as nodes_outfile:
+    nodewriter = csv.writer(nodes_outfile, delimiter = ";", quotechar="|",
+                            quoting=csv.QUOTE_MINIMAL)
+    nodewriter.writerow(["Node_ID"])
 
-    with open(edges_filename, "w") as edges_outfile:
-        edges_outfile.write("Source_ID;Destination_ID\n")
+    with open(edges_filename, "w", newline = "\n", encoding = "utf-8") as edges_outfile:
+        edgewriter = csv.writer(edges_outfile, delimiter = ";", quotechar = "|", 
+                                quoting=csv.QUOTE_MINIMAL)
+        edgewriter.writerow(["Source_ID", "Destination_ID"])
 
         with open(filename, "r") as infile:
             
@@ -62,7 +67,7 @@ with open(nodes_filename, "w") as nodes_outfile:
             go_to_first_page(infile)
 
             while True:
-                nodes_outfile.write("%d\n" % (i+1))
+                nodewriter.writerow(["%d" % (i+1)])
 
                 data = next_article(infile)
 
@@ -74,6 +79,6 @@ with open(nodes_filename, "w") as nodes_outfile:
                 article_number, article = data
 
                 for destination_id in possible_routes(article):
-                    edges_outfile.write("%d;%d\n" % (i, destination_id))
+                    edgewriter.writerow(["%d" % i, "%d" % destination_id])
 
 
