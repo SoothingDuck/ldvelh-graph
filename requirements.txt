@@ -1,0 +1,8 @@
+networkx
+numpy
+scipy
+pandas
+matplotlib
+lxml
+pydot
+pygraphviz
