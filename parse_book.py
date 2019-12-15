@@ -37,7 +37,10 @@ def possible_routes(article):
             flag_vous = True
         
         if flag_vous:
-            m = [int(x) for x in re.findall("[0-9]+", line)]
+            m = [int(x) for x in re.findall("([0-9]+)\.", line)]
+            tmp = tmp + m 
+
+            m = [int(x) for x in re.findall("([0-9]+)\)", line)]
             tmp = tmp + m 
 
     return(tmp)
@@ -55,7 +58,7 @@ with open(nodes_filename, "w") as nodes_outfile:
 
         with open(filename, "r") as infile:
             
-            i = 1
+            i = 0
             go_to_first_page(infile)
 
             nodes_outfile.write("%d\n" % i)
@@ -73,9 +76,4 @@ with open(nodes_filename, "w") as nodes_outfile:
                     edges_outfile.write("%d;%d\n" % (i, destination_id))
 
                 nodes_outfile.write("%d\n" % i)
-
-                
-                
-
-
 
