@@ -61,10 +61,11 @@ with open(nodes_filename, "w") as nodes_outfile:
             i = 0
             go_to_first_page(infile)
 
-            nodes_outfile.write("%d\n" % i)
-
             while True:
+                nodes_outfile.write("%d\n" % (i+1))
+
                 data = next_article(infile)
+
                 if data is None:
                     break
 
@@ -75,5 +76,4 @@ with open(nodes_filename, "w") as nodes_outfile:
                 for destination_id in possible_routes(article):
                     edges_outfile.write("%d;%d\n" % (i, destination_id))
 
-                nodes_outfile.write("%d\n" % i)
 
