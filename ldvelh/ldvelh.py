@@ -19,6 +19,10 @@ class LabyrintheDeLaMort(LDVELH):
         self._paragraphs = self._parse_paragraphs()
         self._links = self._parse_links()
 
+    def get_links(self, numero_paragraphe):
+        """Liste des liens vers les autres paragraphes"""
+        pass
+        
     def paragraphs(self):
         """Retourne la liste des paragraphes"""
         return(self._paragraphs)
@@ -64,8 +68,3 @@ class LabyrintheDeLaMort(LDVELH):
                                 result[current_paragraph] = []
                             result[current_paragraph].append(lien)
         return(result)
-    
-epub_book_filename = os.path.join("ldvelh-graph", "data", "labyrinthe_mort.epub")
-
-book = LabyrintheDeLaMort()
-print(book.paragraphs())
