@@ -9,8 +9,12 @@ setup(
     license="MIT",
     packages=find_packages(),
     install_requires=[
-        "pdfminer.six",
+        "EbookLib",
+        "beautifulsoup4",
     ],
+    package_data={
+        'ldvelh-graph': ['data/*.epub']
+    },
 )
 
 # setup(name='funniest',
