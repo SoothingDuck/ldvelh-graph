@@ -12,7 +12,7 @@ class LabyrintheDeLaMort(LDVELH):
 
     def __init__(self):
         import pkg_resources
-        DATA_PATH = pkg_resources.resource_filename('ldvelh-graph', 'data')
+        DATA_PATH = pkg_resources.resource_filename('ldvelh', 'data')
         self.ebook_filename = os.path.join(DATA_PATH, "labyrinthe_mort.epub")
         self.ebook = epub.read_epub(self.ebook_filename)
 
@@ -21,7 +21,10 @@ class LabyrintheDeLaMort(LDVELH):
 
     def get_links(self, numero_paragraphe):
         """Liste des liens vers les autres paragraphes"""
-        pass
+        result = []
+        if numero_paragraphe in self._links:
+            result = self._links[numero_paragraphe]
+        return(result)
         
     def paragraphs(self):
         """Retourne la liste des paragraphes"""
