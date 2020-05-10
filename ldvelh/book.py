@@ -7,46 +7,31 @@ import pkg_resources
 
 
 class Paragraph(object):
-    pass
+
+    def __init__(self, liste_elem):
+        self._elems = liste_elem
+        self._links = None
+
+    def __contains__(self, item):
+        for elem in self._elems:
+            if item in elem.get_text().lower():
+                return True
+
+    @property
+    def links(self):
+        if self._links is None:
+            self._parse_links()
+        return self._links
 
 
 class CalibreParagraph(Paragraph):
-    pass
 
-    # def get_links(self, numero_paragraphe):
-    #     """Liste des liens vers les autres paragraphes"""
-    #     result = []
-    #     if numero_paragraphe in self._links:
-    #         result = self._links[numero_paragraphe]
-    #     return (result)
-    #
-    # def _parse_links(self):
-    #     """Retourne la liste des liens entre paragraphes"""
-    #     result = {}
-    #     current_paragraph = None
-    #     for x in self.ebook.get_items_of_type(ebooklib.ITEM_DOCUMENT):
-    #         soup = BeautifulSoup(x.get_body_content(), 'html.parser')
-    #         for calibre1 in soup.find_all("p", class_="calibre1"):
-    #
-    #             # Identification paragraphe
-    #             tmp = calibre1.find("b", class_="calibre4")
-    #             if tmp and not calibre1.find("a"):
-    #                 try:
-    #                     current_paragraph = int(tmp.text)
-    #                 except ValueError:
-    #                     pass
-    #
-    #             # Dans un paragraphe
-    #             if current_paragraph is not None:
-    #                 a = calibre1.find("a")
-    #                 if a is not None and a.get("href") is not None:
-    #                     m = re.search("([0-9]+)", a.text)
-    #                     if m is not None:
-    #                         lien = int(m.groups()[0])
-    #                         if current_paragraph not in result:
-    #                             result[current_paragraph] = []
-    #                         result[current_paragraph].append(lien)
-    #     return (result)
+    def _parse_links(self):
+        result = []
+        for elem in self._elems:
+            for tmp in elem.find_all("b", class_="calibre4"):
+                result.append(int(tmp.get_text()))
+        self._links = result
 
 
 class Book(object):
@@ -98,18 +83,19 @@ class CalibreBook(Book):
                     # Test changement de paragraphe
                     if current_paragraph != [] and self.__get_paragraph_title(calibre1) != current_paragraph:
                         """On ajoute à la liste des résultats"""
-                        result[paragraphe_number] = current_paragraph
+                        result[paragraphe_number] = CalibreParagraph(current_paragraph)
                         current_paragraph = []
                     paragraphe_number = self.__get_paragraph_title(calibre1)
 
                 # Sinon on ajoute les éléments
                 if paragraphe_number != 0:
-                    current_paragraph.append(calibre1)
+                    if not self.__is_paragraph_title(calibre1):
+                        current_paragraph.append(calibre1)
 
         # Ajout du dernier paragraphe
-        result[paragraphe_number] = current_paragraph
+        result[paragraphe_number] = CalibreParagraph(current_paragraph)
 
-        return result
+        self._paragraphs = result
 
 
 class LabyrintheDeLaMort(CalibreBook):
