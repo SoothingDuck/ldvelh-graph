@@ -1,8 +1,8 @@
 
-import networkx as nx
-from pprint import pprint
+from networkx import DiGraph
 
-class BookGraph(nx.DiGraph):
+
+class BookGraph(DiGraph):
 
     def __init__(self, book):
         super().__init__()
@@ -15,7 +15,6 @@ class BookGraph(nx.DiGraph):
             self.add_node(x)
 
     def _add_edges(self):
-        for key, value in self._book.paragraphs.items():
-            print(key)
-            pprint(value.content)
-            print(value.links)
+        for source, value in self._book.paragraphs.items():
+            for destination in value.links:
+                self.add_edge(source, destination)
