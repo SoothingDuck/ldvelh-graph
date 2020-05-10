@@ -8,4 +8,4 @@ epub_book_filename = os.path.join("ldvelh-graph", "data", "labyrinthe_mort.epub"
 book = LabyrintheDeLaMort()
 
 p = book.paragraphs
-pprint(p[1])
+pprint(p[6].links)

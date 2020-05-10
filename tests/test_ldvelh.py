@@ -11,14 +11,14 @@ def test_paragraphs():
     assert len(paragraphs) == 400
 
     # On test un peu le contenu du paragraphe 1
-    assert "flaques" in paragraphs[1].content
-    assert "clameurs" in paragraphs[1].content
-    assert "Des" not in paragraphs[1].content
-    assert "manticore" not in paragraphs[1].content
+    assert "flaques" in paragraphs[1]
+    assert "clameurs" in paragraphs[1]
+    assert "Des" not in paragraphs[1]
+    assert "manticore" not in paragraphs[1]
 
     # On test un peu le contenu du paragraphe 6
-    assert "manticore" in paragraphs[6].content
-    assert "clameurs" not in paragraphs[6].content
+    assert "manticore" in paragraphs[6]
+    assert "clameurs" not in paragraphs[6]
 
 def test_links():
 
@@ -29,3 +29,7 @@ def test_links():
 
     assert paragraphs[2].links == []
     assert paragraphs[400].links == []
+
+    assert len(paragraphs[9].links) == 2
+
+    assert len(paragraphs[16].links) == 6
