@@ -1,5 +1,3 @@
-
-from pprint import pprint
 import os
 import ebooklib.epub
 from bs4 import BeautifulSoup
@@ -7,7 +5,6 @@ import pkg_resources
 
 
 class Paragraph(object):
-
     def __init__(self, liste_elem):
         self._elems = liste_elem
         self._links = None
@@ -22,6 +19,9 @@ class Paragraph(object):
         if self._links is None:
             self._parse_links()
         return self._links
+
+    def _parse_links(self):
+        raise Exception("Not implemented")
 
 
 class CalibreParagraph(Paragraph):
@@ -54,19 +54,21 @@ class Book(object):
 
 class CalibreBook(Book):
     """Book parsable with calibre syntax"""
+
     def __init__(self):
         super().__init__()
         self.ebook = ebooklib.epub.read_epub(Book.EBOOK_FILENAME)
 
-
-    def __is_paragraph_title(self, elem):
+    @staticmethod
+    def __is_paragraph_title(elem):
         """Un titre ?"""
         tmp = elem.find("b", class_="calibre4") and 5 > len(elem.get_text()) > 1
-        return(tmp)
+        return tmp
 
-    def __get_paragraph_title(self, elem):
+    @staticmethod
+    def __get_paragraph_title(elem):
         """Récupère le numéro du paragraphe"""
-        return(int(elem.get_text()))
+        return int(elem.get_text())
 
     def _parse_paragraphs(self):
         """Retourne la liste des paragraphes existants"""
