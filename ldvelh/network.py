@@ -11,8 +11,11 @@ class BookGraph(DiGraph):
         self._add_edges()
 
     def _add_nodes(self):
-        for x in self._book.paragraphs.keys():
-            self.add_node(x)
+        for key, value in self._book.paragraphs.items():
+            if value.label is not None:
+                self.add_node(key, label=value.label)
+            else:
+                self.add_node(key)
 
     def _add_edges(self):
         for source, value in self._book.paragraphs.items():
