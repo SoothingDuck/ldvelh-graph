@@ -9,6 +9,7 @@ class Paragraph(object):
         self._elems = liste_elem
         self._links = None
         self._label = None
+        self._categorie = "RAS"
 
     def __contains__(self, item):
         for elem in self._elems:
@@ -22,6 +23,14 @@ class Paragraph(object):
     @label.setter
     def label(self, value):
         self._label = value
+
+    @property
+    def categorie(self):
+        return self._categorie
+
+    @categorie.setter
+    def categorie(self, value):
+        self._categorie = value
 
     @property
     def links(self):
@@ -123,4 +132,21 @@ class LabyrintheDeLaMort(CalibreBook):
         super()._parse_paragraphs()
 
         self.paragraphs[1].label = "début"
+        self.paragraphs[1].categorie = "début"
+
         self.paragraphs[400].label = "fin"
+        self.paragraphs[400].categorie = "fin"
+
+        self.paragraphs[52].label = "livre rouge"
+        self.paragraphs[138].label = "livre cuir noir"
+
+        self.paragraphs[11].label = "émeraude"
+        self.paragraphs[11].categorie = "émeraude"
+        self.paragraphs[240].label = "émeraude"
+        self.paragraphs[240].categorie = "émeraude"
+
+        self.paragraphs[162].label = "saphir"
+        self.paragraphs[162].categorie = "saphir"
+
+        self.paragraphs[320].label = "diamant"
+        self.paragraphs[320].categorie = "diamant"
