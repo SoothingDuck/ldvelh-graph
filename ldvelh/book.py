@@ -30,14 +30,18 @@ class CalibreParagraph(Paragraph):
         result = []
         for elem in self._elems:
             for tmp in elem.find_all("b", class_="calibre4"):
-                result.append(int(tmp.get_text()))
+                if tmp.get_text().strip() != '':
+                    result.append(int(tmp.get_text()))
         self._links = result
+
+    @property
+    def content(self):
+        return self._elems
 
 
 class Book(object):
     """Root class for book 'dont vous êtes le héros'"""
     DATA_PATH = pkg_resources.resource_filename('ldvelh', 'data')
-    EBOOK_FILENAME = None
 
     def __init__(self):
         self._paragraphs = None
@@ -55,9 +59,9 @@ class Book(object):
 class CalibreBook(Book):
     """Book parsable with calibre syntax"""
 
-    def __init__(self):
+    def __init__(self, book_path):
         super().__init__()
-        self.ebook = ebooklib.epub.read_epub(Book.EBOOK_FILENAME)
+        self.ebook = ebooklib.epub.read_epub(book_path)
 
     @staticmethod
     def __is_paragraph_title(elem):
@@ -102,4 +106,6 @@ class CalibreBook(Book):
 
 class LabyrintheDeLaMort(CalibreBook):
     """Le Labyrinthe De La Mort"""
-    Book.EBOOK_FILENAME = os.path.join(Book.DATA_PATH, "labyrinthe_mort.epub")
+
+    def __init__(self):
+        super().__init__(os.path.join(Book.DATA_PATH, "labyrinthe_mort.epub"))

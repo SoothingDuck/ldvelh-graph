@@ -1,7 +1,7 @@
-
 from ldvelh.book import LabyrintheDeLaMort
 
 ldlm = LabyrintheDeLaMort()
+
 
 def test_paragraphs():
     """On s'assure que les paragraphes sont bien récupérés"""
@@ -20,8 +20,8 @@ def test_paragraphs():
     assert "manticore" in paragraphs[6]
     assert "clameurs" not in paragraphs[6]
 
-def test_links():
 
+def test_links():
     paragraphs = ldlm.paragraphs
 
     assert 66 in paragraphs[1].links
@@ -33,3 +33,7 @@ def test_links():
     assert len(paragraphs[9].links) == 2
 
     assert len(paragraphs[16].links) == 6
+
+    assert 98 in paragraphs[41].links
+    assert 126 in paragraphs[41].links
+    assert 83 in paragraphs[41].links

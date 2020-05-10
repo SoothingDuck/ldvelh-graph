@@ -1,11 +1,15 @@
 import os
-from pprint import pprint
+import networkx as nx
+import matplotlib.pyplot as plt
 
 from .book import LabyrintheDeLaMort
+from .network import BookGraph
     
 epub_book_filename = os.path.join("ldvelh-graph", "data", "labyrinthe_mort.epub")
 
 book = LabyrintheDeLaMort()
 
-p = book.paragraphs
-pprint(p[6].links)
+G = BookGraph(book)
+
+nx.draw(G, with_labels=True, font_weight='bold')
+plt.show()
