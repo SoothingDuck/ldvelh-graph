@@ -1,2 +1,6 @@
-setuptools
+setuptools~=46.1.3
 pytest
+
+EbookLib~=0.17.1
+beautifulsoup4~=4.9.0
+networkx~=2.4

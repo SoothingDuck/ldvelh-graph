@@ -1,9 +1,9 @@
 
 import os
-import ebooklib
-from ebooklib import epub
+import ebooklib.epub
 from bs4 import BeautifulSoup
 import pkg_resources
+
 
 class Paragraph(object):
     pass
@@ -43,33 +43,36 @@ class Paragraph(object):
     #                         result[current_paragraph].append(lien)
     #     return (result)
 
+
 class Book(object):
     """Root class for book 'dont vous êtes le héros'"""
     DATA_PATH = pkg_resources.resource_filename('ldvelh', 'data')
     EBOOK_FILENAME = None
 
+    def __init__(self):
+        self._paragraphs = None
+
     @property
     def paragraphs(self):
         if self._paragraphs is None:
-            self._parse_paragraphs
-        return(self._paragraphs)
+            self._parse_paragraphs()
+        return self._paragraphs
 
     def _parse_paragraphs(self):
-        raise "Not Implemented"
+        raise Exception("Not Implemented")
+
 
 class CalibreBook(Book):
     """Book parsable with calibre syntax"""
     def __init__(self):
-        self.ebook = epub.read_epub(Book.EBOOK_FILENAME)
-        self._paragraphs = None
+        super().__init__()
+        self.ebook = ebooklib.epub.read_epub(Book.EBOOK_FILENAME)
 
     def _parse_paragraphs(self):
         """Retourne la liste des paragraphes existants"""
         result = []
         for x in self.ebook.get_items_of_type(ebooklib.ITEM_DOCUMENT):
             soup = BeautifulSoup(x.get_body_content(), 'html.parser')
-            import re
-            from pprint import pprint
             # Iteration sur calibre1 (le plus commun)
             for calibre1 in soup.find_all("p", class_="calibre1"):
                 print(calibre1)
@@ -86,7 +89,8 @@ class CalibreBook(Book):
             #             result.append(int(tmp.text))
             #         except ValueError:
             #             pass
-        return (result)
+        return result
+
 
 class LabyrintheDeLaMort(CalibreBook):
     """Le Labyrinthe De La Mort"""
