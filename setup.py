@@ -5,6 +5,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 install_requires = [
     'EbookLib',
     'beautifulsoup4',
+    'networkx'
     ]
 
 setup(
@@ -17,7 +18,7 @@ setup(
     packages=find_packages(),
     install_requires=install_requires,
     package_data={
-        'ldvelh-graph': ['data/*.epub']
+        'ldvelh': ['data/*.epub', 'data/*.pdf']
     },
 )
 

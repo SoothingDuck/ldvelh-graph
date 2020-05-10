@@ -1,10 +1,11 @@
 import os
+from pprint import pprint
 
-from .ldvelh import LabyrintheDeLaMort
+from .book import LabyrintheDeLaMort
     
 epub_book_filename = os.path.join("ldvelh-graph", "data", "labyrinthe_mort.epub")
 
 book = LabyrintheDeLaMort()
 
-for node in book.paragraphs():
-    print(node)
+p = book.paragraphs
+pprint(p[1])
