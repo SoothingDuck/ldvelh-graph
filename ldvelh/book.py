@@ -8,11 +8,20 @@ class Paragraph(object):
     def __init__(self, liste_elem):
         self._elems = liste_elem
         self._links = None
+        self._label = None
 
     def __contains__(self, item):
         for elem in self._elems:
             if item in elem.get_text().lower():
                 return True
+
+    @property
+    def label(self):
+        return self._label
+
+    @label.setter
+    def label(self, value):
+        self._label = value
 
     @property
     def links(self):
@@ -109,3 +118,9 @@ class LabyrintheDeLaMort(CalibreBook):
 
     def __init__(self):
         super().__init__(os.path.join(Book.DATA_PATH, "labyrinthe_mort.epub"))
+
+    def _parse_paragraphs(self):
+        super()._parse_paragraphs()
+
+        self.paragraphs[1].label = "début"
+        self.paragraphs[400].label = "fin"
