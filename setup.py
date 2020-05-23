@@ -2,11 +2,7 @@ import os
 from setuptools import setup, find_packages
 here = os.path.abspath(os.path.dirname(__file__))
 
-install_requires = [
-    'EbookLib',
-    'beautifulsoup4',
-    'networkx'
-    ]
+install_requires = ['EbookLib', 'beautifulsoup4', 'networkx']
 
 setup(
     name="LdvelhGraph",
@@ -17,9 +13,7 @@ setup(
     license="MIT",
     packages=find_packages(),
     install_requires=install_requires,
-    package_data={
-        'ldvelh': ['data/*.epub', 'data/*.pdf']
-    },
+    package_data={'ldvelh': ['data/*.epub', 'data/*.pdf']},
 )
 
 # setup(name='funniest',

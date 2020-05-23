@@ -1,9 +1,7 @@
-
 from networkx import DiGraph
 
 
 class BookGraph(DiGraph):
-
     def __init__(self, book):
         super().__init__()
         self._book = book
@@ -13,7 +11,9 @@ class BookGraph(DiGraph):
     def _add_nodes(self):
         for key, value in self._book.paragraphs.items():
             if value.label is not None:
-                self.add_node(key, label=value.label, categorie=value.categorie)
+                self.add_node(key,
+                              label=value.label,
+                              categorie=value.categorie)
             else:
                 self.add_node(key, categorie=value.categorie)
 

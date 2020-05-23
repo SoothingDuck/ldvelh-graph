@@ -43,7 +43,6 @@ class Paragraph(object):
 
 
 class CalibreParagraph(Paragraph):
-
     def _parse_links(self):
         result = []
         for elem in self._elems:
@@ -76,7 +75,6 @@ class Book(object):
 
 class CalibreBook(Book):
     """Book parsable with calibre syntax"""
-
     def __init__(self, book_path):
         super().__init__()
         self.ebook = ebooklib.epub.read_epub(book_path)
@@ -84,7 +82,8 @@ class CalibreBook(Book):
     @staticmethod
     def __is_paragraph_title(elem):
         """Un titre ?"""
-        tmp = elem.find("b", class_="calibre4") and 5 > len(elem.get_text()) > 1
+        tmp = elem.find("b",
+                        class_="calibre4") and 5 > len(elem.get_text()) > 1
         return tmp
 
     @staticmethod
@@ -105,9 +104,11 @@ class CalibreBook(Book):
                 # Un titre?
                 if self.__is_paragraph_title(calibre1):
                     # Test changement de paragraphe
-                    if current_paragraph != [] and self.__get_paragraph_title(calibre1) != current_paragraph:
+                    if current_paragraph != [] and self.__get_paragraph_title(
+                            calibre1) != current_paragraph:
                         """On ajoute à la liste des résultats"""
-                        result[paragraphe_number] = CalibreParagraph(current_paragraph)
+                        result[paragraphe_number] = CalibreParagraph(
+                            current_paragraph)
                         current_paragraph = []
                     paragraphe_number = self.__get_paragraph_title(calibre1)
 
@@ -124,7 +125,6 @@ class CalibreBook(Book):
 
 class LabyrintheDeLaMort(CalibreBook):
     """Le Labyrinthe De La Mort"""
-
     def __init__(self):
         super().__init__(os.path.join(Book.DATA_PATH, "labyrinthe_mort.epub"))
 
