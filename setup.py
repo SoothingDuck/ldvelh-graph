@@ -2,7 +2,7 @@ import os
 from setuptools import setup, find_packages
 here = os.path.abspath(os.path.dirname(__file__))
 
-install_requires = ['EbookLib', 'beautifulsoup4', 'networkx']
+install_requires = ['EbookLib', 'beautifulsoup4', 'networkx', 'wheel']
 
 setup(
     name="LdvelhGraph",
@@ -15,16 +15,3 @@ setup(
     install_requires=install_requires,
     package_data={'ldvelh': ['data/*.epub', 'data/*.pdf']},
 )
-
-# setup(name='funniest',
-#       version='0.1',
-#       description='The funniest joke in the world',
-#       url='http://github.com/storborg/funniest',
-#       author='Flying Circus',
-#       author_email='flyingcircus@example.com',
-#       license='MIT',
-#       packages=['funniest'],
-#       install_requires=[
-#           'markdown',
-#       ],
-#       zip_safe=False)
