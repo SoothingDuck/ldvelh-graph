@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "ldvelh"
+version = "0.1.0"
+description = ""
+authors = ["Orpheus <orpheus@mampang.com>"]
+readme = "README.md"
+packages = [{include = "ldvelh"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+ebooklib = "^0.18"
+beautifulsoup4 = "^4.12.2"
+networkx = "^3.1"
+numpy = "^1.25.2"
+matplotlib = "^3.7.2"
+
+
+[tool.poetry.group.dev.dependencies]
+pynvim = "^0.4.3"
+yapf = "^0.40.1"
+isort = "^5.12.0"
+coverage = "^7.2.7"
+pylint = "^2.17.5"
+pytest = "^7.4.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
