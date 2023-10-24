@@ -1,9 +1,0 @@
-wheel
-setuptools
-pytest
-
-EbookLib
-beautifulsoup4
-networkx
-
-matplotlib
