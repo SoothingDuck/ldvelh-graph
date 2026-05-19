@@ -1,7 +1,7 @@
 import os
+from importlib.resources import files
 import ebooklib.epub
 from bs4 import BeautifulSoup
-import pkg_resources
 
 
 class Paragraph(object):
@@ -58,7 +58,7 @@ class CalibreParagraph(Paragraph):
 
 class Book(object):
     """Root class for book 'dont vous êtes le héros'"""
-    DATA_PATH = pkg_resources.resource_filename('ldvelh', 'data')
+    DATA_PATH = str(files('ldvelh') / 'data')
 
     def __init__(self):
         self._paragraphs = None

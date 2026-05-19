@@ -1,28 +1,31 @@
-[tool.poetry]
+[project]
 name = "ldvelh"
 version = "0.1.0"
 description = ""
-authors = ["Orpheus <orpheus@mampang.com>"]
+authors = [{ name = "Orpheus", email = "orpheus@mampang.com" }]
 readme = "README.md"
-packages = [{include = "ldvelh"}]
+requires-python = ">=3.10,<4.0"
+dependencies = [
+    "ebooklib>=0.18,<0.19",
+    "beautifulsoup4>=4.12.2,<5.0.0",
+    "networkx>=3.1,<4.0",
+    "numpy>=1.25.2,<2.0.0",
+    "matplotlib>=3.7.2,<4.0.0",
+]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-ebooklib = "^0.18"
-beautifulsoup4 = "^4.12.2"
-networkx = "^3.1"
-numpy = "^1.25.2"
-matplotlib = "^3.7.2"
-
-
-[tool.poetry.group.dev.dependencies]
-pynvim = "^0.4.3"
-yapf = "^0.40.1"
-isort = "^5.12.0"
-coverage = "^7.2.7"
-pylint = "^2.17.5"
-pytest = "^7.4.0"
+[dependency-groups]
+dev = [
+    "pynvim>=0.4.3,<0.5.0",
+    "yapf>=0.40.1,<0.41.0",
+    "isort>=5.12.0,<6.0.0",
+    "coverage>=7.2.7,<8.0.0",
+    "pylint>=2.17.5,<3.0.0",
+    "pytest>=7.4.0,<8.0.0",
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["ldvelh"]

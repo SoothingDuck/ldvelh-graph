@@ -1,17 +1,17 @@
 # Installation
 
-The installation relies on [Poetry](https://python-poetry.org/), once it is installed you can define your virtualenv for the project with:
+The installation relies on [uv](https://docs.astral.sh/uv/), once it is installed you can define your virtualenv for the project with:
 
 ```bash
-poetry install
+uv sync
 ```
 
 # Testing
 
-Still with [Poetry](https://python-poetry.org/):
+Still with [uv](https://docs.astral.sh/uv/):
 
 ```bash
-poetry run pytest
+uv run pytest
 ```
 
 # Example
@@ -19,8 +19,7 @@ poetry run pytest
 An exemple of fighting-fantasy book parsing (french edition of Deathtrap Dungeon)
 
 ```bash
-poetry run python scripts/jouons.py
+uv run python scripts/jouons.py
 ```
 
 The file `labyrinthe.graphml` is now available to analyze with some tool like [Gephi](https://gephi.org/)
-
